@@ -34,7 +34,10 @@ public class HuffmanUtilTest {
         expResult.add(HuffKnoop.create('a',2));
         expResult.add(HuffKnoop.create('n',3));
         List<HuffKnoop> result = HuffmanUtil.getFrequentieHuffKnoop(data);
-        assertEquals(expResult,result);
+        //Foute asserts
+        //assertEquals(expResult,result);
+        //assertArrayEquals(expResult.toArray(), result.toArray());
+        assertTrue(result.containsAll(expResult) && expResult.containsAll(result) && expResult.size() == result.size());
     }
 
     /**
