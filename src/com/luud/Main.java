@@ -20,6 +20,7 @@ public class Main {
         FileReader fr = new FileReader(args[0]);
         BufferedReader br = new BufferedReader(fr);
         while((character = br.read()) != -1) {
+            System.out.println(character);
             characters.add((char)character);
         }
         HashMap<Character, Integer> countedCharacters = operations.countCharacters(characters);
