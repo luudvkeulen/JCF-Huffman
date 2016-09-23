@@ -1,7 +1,8 @@
 package huffman;
 
 public class HuffmanKnoop {
-    public HuffmanKnoop(char c, int i, HuffmanKnoop b1k1, HuffmanKnoop b1k3) {
+    public HuffmanKnoop(char character, int integer, HuffmanKnoop leftKnoop, HuffmanKnoop rightKnoop) {
+
     }
 
     public String maakBericht(String bericht1) {

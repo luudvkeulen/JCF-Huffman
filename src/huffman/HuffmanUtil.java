@@ -35,7 +35,10 @@ public class HuffmanUtil {
     }
 
     public static List<HuffKnoop> getKoppel(List<HuffKnoop> list, int index) {
-        return null;
+        List<HuffKnoop> returnlist = new ArrayList();
+        returnlist.add(list.get(index).getLeftChild());
+        returnlist.add(list.get(index).getRightChild());
+        return returnlist;
     }
 
     public static PriorityQueue<HuffKnoop> getHuffmanBoomRij(List<HuffKnoop> frequentieHuffKnoop) {
