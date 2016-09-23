@@ -1,15 +1,15 @@
 package huffman;
 
 public class HuffKnoop {
-    private Character character;
-    private Integer amount;
+    private static Character character;
+    private static Integer amount;
     private static HuffKnoop leftChild, rightChild;
 
-    public Character getCharacter() {
+    public static Character getCharacter() {
         return character;
     }
 
-    public Integer getAmount() {
+    public static Integer getAmount() {
         return amount;
     }
 
@@ -42,12 +42,17 @@ public class HuffKnoop {
 
     public static HuffKnoop create(Character character ,Integer amount) {
         HuffKnoop newKnoop;
-        if(getLeftChild() == null) {
-            newKnoop = new HuffKnoop(new HuffKnoop(character, amount));
-        } else if(getRightChild() == null) {
-            setRightChild(new HuffKnoop());
+        if(getCharacter() == null) {
+            newKnoop = new HuffKnoop(character, amount);
+        } else {
+            newKnoop = new HuffKnoop(getCharacter(), getAmount());
+            if(getLeftChild() == null) {
+                newKnoop.setLeftChild(new HuffKnoop(character, amount));
+            } else if(getRightChild() == null) {
+                newKnoop.setRightChild(new HuffKnoop(character, amount));
+            }
         }
-        return null;
+        return newKnoop;
     }
 
     public void addOne() {
