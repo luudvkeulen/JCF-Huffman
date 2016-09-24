@@ -26,7 +26,7 @@ public class OperationsTest {
     }
 
     @Test
-    public void countCharacters() throws Exception {
+    public void countCharactersTest() throws Exception {
         //Expected
         ArrayList<HuffNode> expected = new ArrayList<>();
         expected.add(new HuffNode('b', 1));
@@ -40,7 +40,7 @@ public class OperationsTest {
     }
 
     @Test
-    public void sortCountedCharacters() throws Exception {
+    public void sortCountedCharactersTest() throws Exception {
         //Expected
         PriorityQueue<HuffNode> expected = new PriorityQueue<>();
         expected.add(new HuffNode('n', 3));
@@ -57,7 +57,7 @@ public class OperationsTest {
     }
 
     @Test
-    public void createTree() throws Exception {
+    public void createTreeTest() throws Exception {
         PriorityQueue<HuffNode> result = operations.sortCountedCharacters(operations.countCharacters(characters));
         HuffNode root = operations.createTree(result);
         //Create instances of first node
@@ -76,5 +76,23 @@ public class OperationsTest {
         twoNode.leftNode = new HuffNode('b', 1, null, null, twoNode);
         //Assert
         assertEquals(expected, root);
+    }
+
+    private String lookupCharacter(Character c) {
+        PriorityQueue<HuffNode> result = operations.sortCountedCharacters(operations.countCharacters(characters));
+        HuffNode root = operations.createTree(result);
+        return operations.lookup(root, c);
+    }
+
+    @Test
+    public void lookupCharactersTest() {
+        String expectedBString = "110";
+        String expectedAString = "10";
+        String expectedNString = "0";
+        String expectedEString = "111";
+        assertEquals(expectedBString, lookupCharacter('b'));
+        assertEquals(expectedAString, lookupCharacter('a'));
+        assertEquals(expectedNString, lookupCharacter('n'));
+        assertEquals(expectedEString, lookupCharacter('e'));
     }
 }

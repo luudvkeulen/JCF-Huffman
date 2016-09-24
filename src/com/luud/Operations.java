@@ -40,7 +40,7 @@ public class Operations {
             tempLeftNode.parent = parentNode;
             tempRightNode.parent = parentNode;
 
-            System.out.println("Parent: " + (char)parentNode.value + ":" + parentNode.weight + " Left: " + (char)tempLeftNode.value + ":" + tempLeftNode.weight + " Right: " + (char)tempRightNode.value + ":" + tempRightNode.weight);
+            //System.out.println("Parent: " + (char)parentNode.value + ":" + parentNode.weight + " Left: " + (char)tempLeftNode.value + ":" + tempLeftNode.weight + " Right: " + (char)tempRightNode.value + ":" + tempRightNode.weight);
             nodes.offer(parentNode);
             TreeDepth++;
         }
