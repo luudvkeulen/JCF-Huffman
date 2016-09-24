@@ -1,10 +1,13 @@
 package com.luud;
 
 import com.luud.models.HuffNode;
+import sun.reflect.generics.tree.Tree;
 
 import java.util.*;
 
 public class Operations {
+    public static int TreeDepth = 0;
+
     public ArrayList<HuffNode> countCharacters (ArrayList<Character> characters) {
         ArrayList<HuffNode> nodes = new ArrayList<>();
         for(Character c : characters) {
@@ -39,8 +42,19 @@ public class Operations {
 
             System.out.println("Parent: " + (char)parentNode.value + ":" + parentNode.weight + " Left: " + (char)tempLeftNode.value + ":" + tempLeftNode.weight + " Right: " + (char)tempRightNode.value + ":" + tempRightNode.weight);
             nodes.offer(parentNode);
+            TreeDepth++;
         }
 
         return nodes.peek();
+    }
+
+    public String lookup(HuffNode rootNode, Character c) {
+        Map<Character, String> result = rootNode.lookup(c, "", new HashMap<>());
+        String resultString = result.get(c);
+        return resultString;
+    }
+
+    public String encode(HuffNode rootNode) {
+        return "";
     }
 }
