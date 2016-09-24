@@ -55,8 +55,6 @@ public class HuffNode implements Comparable<HuffNode>, Serializable{
             } else {
                 result.index = index;
                 result.character = (char)this.value;
-                //result = new CharacterWithIndex((char)this.value, index);
-                //result.put((char)this.value, index);
             }
         } else  if(substring.equals("1")) {
             if(rightNode != null) {
@@ -64,8 +62,6 @@ public class HuffNode implements Comparable<HuffNode>, Serializable{
             } else {
                 result.index = index;
                 result.character = (char)this.value;
-                //result = new CharacterWithIndex((char)this.value, index);
-               //result.put((char)this.value, index);
             }
         }
         return result;
