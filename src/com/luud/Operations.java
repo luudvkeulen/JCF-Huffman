@@ -91,10 +91,10 @@ public class Operations {
         }
     }
 
-    public HuffNode importFile() {
+    public HuffNode importTree() {
         try {
             FileInputStream fis = new FileInputStream("boom.bin");
-            ObjectInput oos = new ObjectInputStream(fis);
+            ObjectInputStream oos = new ObjectInputStream(fis);
             HuffNode result = (HuffNode)oos.readObject();
             System.out.println(result);
             return result;
@@ -106,5 +106,23 @@ public class Operations {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public String importEncoded() {
+        try {
+            FileInputStream fis = new FileInputStream("encoded.bin");
+            int i = 0;
+            String result = "";
+            while((i=fis.read()) != -1) {
+                result += (char)i;
+            }
+            fis.close();
+            return result;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }
