@@ -56,4 +56,11 @@ public class OperationsTest {
         }
     }
 
+    @Test
+    public void createTree() throws Exception {
+        PriorityQueue<HuffNode> result = operations.sortCountedCharacters(operations.countCharacters(characters));
+        HuffNode root = operations.createTree(result);
+        System.out.println(root.value);
+        System.out.println(root.weight);
+    }
 }

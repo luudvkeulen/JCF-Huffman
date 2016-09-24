@@ -28,7 +28,19 @@ public class Operations {
         return queue;
     }
 
-    public void createTree(PriorityQueue<HuffNode> nodes) {
+    public HuffNode createTree(PriorityQueue<HuffNode> nodes) {
+        while(nodes.size() > 1) {
+            HuffNode tempLeftNode = nodes.poll();
+            HuffNode tempRightNode = nodes.poll();
 
+            HuffNode parentNode = new HuffNode(0, tempLeftNode.weight + tempRightNode.weight, tempLeftNode, tempRightNode, null);
+            tempLeftNode.parent = parentNode;
+            tempRightNode.parent = parentNode;
+
+            System.out.println("Parent: " + (char)parentNode.value + ":" + parentNode.weight + " Left: " + (char)tempLeftNode.value + ":" + tempLeftNode.weight + " Right: " + (char)tempRightNode.value + ":" + tempRightNode.weight);
+            nodes.offer(parentNode);
+        }
+
+        return nodes.peek();
     }
 }
