@@ -93,9 +93,6 @@ public class Operations {
             FileOutputStream fos = new FileOutputStream("encoded.bin");
             fos.write(encoded.getBytes());
             fos.close();
-            //ObjectOutputStream oos = new ObjectOutputStream(fos);
-            //oos.writeObject(encoded);
-            //oos.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
