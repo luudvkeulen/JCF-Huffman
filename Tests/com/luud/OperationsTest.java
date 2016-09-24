@@ -1,60 +1,59 @@
 package com.luud;
 
-import org.junit.Assert;
-import org.junit.Test;
+import com.luud.models.HuffNode;
+import org.junit.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.lang.reflect.Array;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
 public class OperationsTest {
-    Operations ops = new Operations();
+    Operations operations = new Operations();
+    ArrayList<Character> characters = new ArrayList<>();
 
-    @Test
-    public void countCharacters() throws Exception {
-        ArrayList<Character> testCharacters = new ArrayList();
-        for(int i = 0; i < 5; i++) {
-            testCharacters.add('a');
-        }
-
-        for(int i = 0; i < 7; i++) {
-            testCharacters.add('b');
-        }
-
-        for(int i = 0; i < 3; i++) {
-            testCharacters.add('c');
-        }
-
-        HashMap<Character, Integer> result = ops.countCharacters(testCharacters);
-        for(Map.Entry<Character, Integer> e : result.entrySet()) {
-            if(e.getKey().equals('a')){
-                if(e.getValue() != 5) {
-                    fail();
-                }
-            }
+    @Before
+    public void setUp() {
+        String testString = "bananen";
+        for(Character c : testString.toCharArray()) {
+            characters.add(c);
         }
     }
 
+    @After
+    public void tearDown() {
+        characters = null;
+    }
+
     @Test
-    public void sortCharactersTest() {
-        HashMap<Character, Integer> countedCharacters = new HashMap<>();
-        countedCharacters.put('a', 19);
-        countedCharacters.put('b', 7);
-        countedCharacters.put('c', 34);
-        countedCharacters.put('e', 45);
-        countedCharacters.put('f', 3);
-        countedCharacters.put('g', 3);
-        PriorityQueue<Map.Entry<Character, Integer>> pq = ops.sortCountedCharacters(countedCharacters);
-        Map.Entry<Character, Integer> entry = pq.poll();
-        Assert.assertTrue(entry.getValue() == 3 && entry.getKey() == 'f');
-        Assert.assertTrue(pq.poll().getValue() == 3);
-        Assert.assertTrue(pq.poll().getValue() == 7);
-        Assert.assertTrue(pq.poll().getValue() == 19);
-        Assert.assertTrue(pq.poll().getValue() == 34);
-        Assert.assertTrue(pq.poll().getValue() == 45);
+    public void countCharacters() throws Exception {
+        //Expected
+        ArrayList<HuffNode> expected = new ArrayList<>();
+        expected.add(new HuffNode('b', 1));
+        expected.add(new HuffNode('a', 2));
+        expected.add(new HuffNode('n', 3));
+        expected.add(new HuffNode('e', 1));
+        //Result code
+        ArrayList<HuffNode> result = operations.countCharacters(characters);
+        //Assert
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void sortCountedCharacters() throws Exception {
+        //Expected
+        PriorityQueue<HuffNode> expected = new PriorityQueue<>();
+        expected.add(new HuffNode('n', 3));
+        expected.add(new HuffNode('a', 2));
+        expected.add(new HuffNode('b', 1));
+        expected.add(new HuffNode('e', 1));
+
+        //Result
+        PriorityQueue<HuffNode> result = operations.sortCountedCharacters(operations.countCharacters(characters));
+
+        while(expected.size() > 0) {
+            assertTrue(expected.poll().weight == result.poll().weight);
+        }
     }
 
 }
