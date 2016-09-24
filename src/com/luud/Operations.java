@@ -1,12 +1,12 @@
 package com.luud;
 
 import com.luud.models.HuffNode;
-import sun.reflect.generics.tree.Tree;
 
+import java.io.*;
 import java.util.*;
 
 public class Operations {
-    public static int TreeDepth = 0;
+    private static int TreeDepth = 0;
 
     public ArrayList<HuffNode> countCharacters (ArrayList<Character> characters) {
         ArrayList<HuffNode> nodes = new ArrayList<>();
@@ -54,7 +54,57 @@ public class Operations {
         return resultString;
     }
 
+    public String encode(ArrayList<Character> chars, HuffNode rootNode) {
+        String returnString = "";
+        for(Character c : chars) {
+            returnString += lookup(rootNode, c);
+        }
+        return returnString;
+    }
+
     public String encode(HuffNode rootNode) {
         return "";
+    }
+
+    public void exportToFile(HuffNode rootNode) {
+        try {
+            FileOutputStream fos = new FileOutputStream("boom.bin");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(rootNode);
+            oos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void exportToFile(String encoded) {
+        try {
+            FileOutputStream fos = new FileOutputStream("encoded.bin");
+            fos.write( encoded.getBytes());
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public HuffNode importFile() {
+        try {
+            FileInputStream fis = new FileInputStream("boom.bin");
+            ObjectInput oos = new ObjectInputStream(fis);
+            HuffNode result = (HuffNode)oos.readObject();
+            System.out.println(result);
+            return result;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

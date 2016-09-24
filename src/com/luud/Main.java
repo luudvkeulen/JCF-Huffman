@@ -6,32 +6,30 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.PriorityQueue;
 
 public class Main {
     private static final Operations operations = new Operations();
 
     public static void main(String[] args) throws IOException {
-        ArrayList<Character> characters = FileToArray(args[0]);
+        if(args.length < 1 || args.length > 1) return;
+        String argument = args[0];
+        //if(args[0])
+        ArrayList<Character> characters = FileToArray(argument);
         ArrayList<HuffNode> countedNodes = operations.countCharacters(characters);
         PriorityQueue<HuffNode> sortedNodes = operations.sortCountedCharacters(countedNodes);
-        System.out.println("HashMap:");
-        for(HuffNode node : countedNodes) {
-            System.out.println(node);
-        }
-        System.out.println("Sorted:");
-        while(sortedNodes.size() > 0) {
-            System.out.println(sortedNodes.poll());
-        }
+        HuffNode rootNode = operations.createTree(sortedNodes);
+        operations.exportToFile(rootNode);
+        operations.importFile();
+        String encoded = operations.encode(characters, rootNode);
+        System.out.println(encoded);
+        operations.exportToFile(encoded);
     }
 
     private static ArrayList<Character> FileToArray(String file) {
         ArrayList<Character> characters = new ArrayList<>();
-        int character = 1;
+        int character;
         try {
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);

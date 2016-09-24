@@ -1,8 +1,9 @@
 package com.luud.models;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class HuffNode implements Comparable<HuffNode>{
+public class HuffNode implements Comparable<HuffNode>, Serializable{
     public int value;
     public int weight;
     public HuffNode leftNode;

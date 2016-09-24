@@ -95,4 +95,12 @@ public class OperationsTest {
         assertEquals(expectedNString, lookupCharacter('n'));
         assertEquals(expectedEString, lookupCharacter('e'));
     }
+
+    @Test
+    public void encodeTest() {
+        String expected = "1101001001110";
+        HuffNode root = operations.createTree(operations.sortCountedCharacters(operations.countCharacters(characters)));
+        String result = operations.encode(characters, root);
+        assertEquals(expected, result);
+    }
 }
