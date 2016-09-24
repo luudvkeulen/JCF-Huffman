@@ -1,5 +1,6 @@
 package com.luud;
 
+import com.luud.models.CharacterWithIndex;
 import com.luud.models.HuffNode;
 
 import java.io.*;
@@ -62,8 +63,16 @@ public class Operations {
         return returnString;
     }
 
-    public String encode(HuffNode rootNode) {
-        return "";
+    public String decode(String encoded, HuffNode rootNode) {
+        String message = "";
+        int index = 0;
+        while(index < encoded.length()) {
+            CharacterWithIndex result = rootNode.findCharacter(encoded, index, new CharacterWithIndex());
+            if(result == null || result.character == null) break;
+            message += result.character;
+            index = result.index;
+        }
+        return message;
     }
 
     public void exportToFile(HuffNode rootNode) {
@@ -82,8 +91,11 @@ public class Operations {
     public void exportToFile(String encoded) {
         try {
             FileOutputStream fos = new FileOutputStream("encoded.bin");
-            fos.write( encoded.getBytes());
+            fos.write(encoded.getBytes());
             fos.close();
+            //ObjectOutputStream oos = new ObjectOutputStream(fos);
+            //oos.writeObject(encoded);
+            //oos.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

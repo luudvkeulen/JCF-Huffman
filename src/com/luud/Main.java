@@ -24,6 +24,8 @@ public class Main {
             HuffNode root = operations.importTree();
             String encoded = operations.importEncoded();
             System.out.println(encoded);
+            String decoded = operations.decode(encoded, root);
+            System.out.println(decoded);
         }
     }
 

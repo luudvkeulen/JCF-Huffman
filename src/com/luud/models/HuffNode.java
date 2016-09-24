@@ -42,6 +42,35 @@ public class HuffNode implements Comparable<HuffNode>, Serializable{
         return map;
     }
 
+    public CharacterWithIndex findCharacter(String encoded, int index, CharacterWithIndex result) {
+        if(index >= encoded.length()) {
+            result.character = (char)this.value;
+            result.index = index;
+            return result;
+        }
+        String substring = Character.toString(encoded.charAt(index));
+        if(substring.equals("0")) {
+            if(leftNode != null) {
+                leftNode.findCharacter(encoded, index + 1, result);
+            } else {
+                result.index = index;
+                result.character = (char)this.value;
+                //result = new CharacterWithIndex((char)this.value, index);
+                //result.put((char)this.value, index);
+            }
+        } else  if(substring.equals("1")) {
+            if(rightNode != null) {
+                rightNode.findCharacter(encoded, index + 1, result);
+            } else {
+                result.index = index;
+                result.character = (char)this.value;
+                //result = new CharacterWithIndex((char)this.value, index);
+               //result.put((char)this.value, index);
+            }
+        }
+        return result;
+    }
+
     @Override
     public int compareTo(HuffNode node) {
         return weight - node.weight;
