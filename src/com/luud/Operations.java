@@ -4,6 +4,8 @@ import com.luud.models.CharacterWithIndex;
 import com.luud.models.HuffNode;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Operations {
@@ -89,9 +91,10 @@ public class Operations {
     }
 
     public void exportToFile(String encoded) {
+        BitSet bitSet = createBitset(encoded);
         try {
             FileOutputStream fos = new FileOutputStream("encoded.bin");
-            fos.write(encoded.getBytes());
+            fos.write(bitSet.toByteArray());
             fos.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -105,7 +108,6 @@ public class Operations {
             FileInputStream fis = new FileInputStream("boom.bin");
             ObjectInputStream oos = new ObjectInputStream(fis);
             HuffNode result = (HuffNode)oos.readObject();
-            System.out.println(result);
             return result;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -120,18 +122,42 @@ public class Operations {
     public String importEncoded() {
         try {
             FileInputStream fis = new FileInputStream("encoded.bin");
-            int i = 0;
-            String result = "";
-            while((i=fis.read()) != -1) {
-                result += (char)i;
-            }
-            fis.close();
-            return result;
+            DataInputStream dis = new DataInputStream(fis);
+            File file = new File("encoded.bin");
+            byte[] result = new byte[(int)file.length()];
+            dis.readFully(result);
+            BitSet bs = BitSet.valueOf(result);
+            dis.close();
+            return bitSetToString(bs);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public BitSet createBitset(String s) {
+        BitSet bitSet = new BitSet(s.length());
+        int bitcounter = 0;
+        for(Character c : s.toCharArray()) {
+            if(c.equals('1')) {
+                bitSet.set(bitcounter);
+            }
+            bitcounter++;
+        }
+        return bitSet;
+    }
+
+    public String bitSetToString(BitSet set){
+        String result = "";
+        for(int i = 0; i <= set.length(); i++) {
+            if(set.get(i)) {
+                result += "1";
+            } else {
+                result += "0";
+            }
+        }
+        return result;
     }
 }
