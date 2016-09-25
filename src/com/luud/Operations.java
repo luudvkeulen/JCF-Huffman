@@ -4,12 +4,9 @@ import com.luud.models.CharacterWithIndex;
 import com.luud.models.HuffNode;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class Operations {
-    private static int TreeDepth = 0;
 
     public ArrayList<HuffNode> countCharacters (ArrayList<Character> characters) {
         ArrayList<HuffNode> nodes = new ArrayList<>();
@@ -41,9 +38,7 @@ public class Operations {
 
             HuffNode parentNode = new HuffNode(0, tempLeftNode.weight + tempRightNode.weight, tempLeftNode, tempRightNode);
 
-            //System.out.println("Parent: " + (char)parentNode.value + ":" + parentNode.weight + " Left: " + (char)tempLeftNode.value + ":" + tempLeftNode.weight + " Right: " + (char)tempRightNode.value + ":" + tempRightNode.weight);
             nodes.offer(parentNode);
-            TreeDepth++;
         }
 
         return nodes.peek();
