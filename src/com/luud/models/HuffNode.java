@@ -27,19 +27,19 @@ public class HuffNode implements Comparable<HuffNode>, Serializable{
         weight += 1;
     }
 
-    public Map<Character, String> lookup(Character c, String current, Map<Character, String> map) {
+    public StringBuilder lookup(Character c, String current, StringBuilder result) {
         if(c == this.value) {
-            map.put(c, current);
+            result.append(current);
         }
 
         if(leftNode != null) {
-            leftNode.lookup(c, current + "0", map);
+            leftNode.lookup(c, current + "0", result);
         }
 
         if(rightNode != null) {
-            rightNode.lookup(c, current + "1", map);
+            rightNode.lookup(c, current + "1", result);
         }
-        return map;
+        return result;
     }
 
     public CharacterWithIndex findCharacter(String encoded, int index, CharacterWithIndex result) {

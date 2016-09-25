@@ -52,9 +52,7 @@ public class Operations {
     }
 
     public String lookup(HuffNode rootNode, Character c) {
-        Map<Character, String> result = rootNode.lookup(c, "", new HashMap<>());
-        String resultString = result.get(c);
-        return resultString;
+        return rootNode.lookup(c, "", new StringBuilder()).toString();
     }
 
     public String encode(ArrayList<Character> chars, HuffNode rootNode) {
