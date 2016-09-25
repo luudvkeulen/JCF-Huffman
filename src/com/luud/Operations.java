@@ -107,7 +107,7 @@ public class Operations {
         PrintWriter pw;
         try {
             pw = new PrintWriter("text.txt");
-            pw.println(decoded);
+            pw.print(decoded);
             pw.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
