@@ -25,7 +25,7 @@ public class Main {
             String encoded = operations.importEncoded();
             System.out.println(encoded);
             String decoded = operations.decode(encoded, root);
-            System.out.println(decoded);
+            operations.backToFile(decoded);
         }
     }
 

@@ -103,6 +103,17 @@ public class Operations {
         }
     }
 
+    public void backToFile(String decoded) {
+        PrintWriter pw;
+        try {
+            pw = new PrintWriter("text.txt");
+            pw.println(decoded);
+            pw.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public HuffNode importTree() {
         try {
             FileInputStream fis = new FileInputStream("boom.bin");
@@ -151,7 +162,7 @@ public class Operations {
 
     public String bitSetToString(BitSet set){
         String result = "";
-        for(int i = 0; i <= set.length(); i++) {
+        for(int i = 0; i < set.length(); i++) {
             if(set.get(i)) {
                 result += "1";
             } else {
