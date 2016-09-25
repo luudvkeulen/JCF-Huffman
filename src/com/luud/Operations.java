@@ -39,9 +39,7 @@ public class Operations {
             HuffNode tempLeftNode = nodes.poll();
             HuffNode tempRightNode = nodes.poll();
 
-            HuffNode parentNode = new HuffNode(0, tempLeftNode.weight + tempRightNode.weight, tempLeftNode, tempRightNode, null);
-            tempLeftNode.parent = parentNode;
-            tempRightNode.parent = parentNode;
+            HuffNode parentNode = new HuffNode(0, tempLeftNode.weight + tempRightNode.weight, tempLeftNode, tempRightNode);
 
             //System.out.println("Parent: " + (char)parentNode.value + ":" + parentNode.weight + " Left: " + (char)tempLeftNode.value + ":" + tempLeftNode.weight + " Right: " + (char)tempRightNode.value + ":" + tempRightNode.weight);
             nodes.offer(parentNode);

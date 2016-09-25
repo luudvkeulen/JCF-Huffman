@@ -8,14 +8,12 @@ public class HuffNode implements Comparable<HuffNode>, Serializable{
     public int weight;
     public HuffNode leftNode;
     public HuffNode rightNode;
-    public HuffNode parent;
 
-    public HuffNode(int value, int weight, HuffNode leftNode, HuffNode rightNode, HuffNode parent) {
+    public HuffNode(int value, int weight, HuffNode leftNode, HuffNode rightNode) {
         this.value = value;
         this.weight = weight;
         this.leftNode = leftNode;
         this.rightNode = rightNode;
-        this.parent = parent;
     }
 
     public HuffNode(int value, int weight) {

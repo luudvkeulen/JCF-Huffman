@@ -61,19 +61,17 @@ public class OperationsTest {
         PriorityQueue<HuffNode> result = operations.sortCountedCharacters(operations.countCharacters(characters));
         HuffNode root = operations.createTree(result);
         //Create instances of first node
-        HuffNode nNode = new HuffNode('n', 3, null, null, null);
-        HuffNode fourNode = new HuffNode(0, 4, null, null, null);
-        HuffNode expected = new HuffNode(0, 7, nNode, fourNode, null);
+        HuffNode nNode = new HuffNode('n', 3, null, null);
+        HuffNode fourNode = new HuffNode(0, 4, null, null);
+        HuffNode expected = new HuffNode(0, 7, nNode, fourNode);
         //Second node
-        nNode.parent = expected;
-        fourNode.parent = expected;
-        HuffNode aNode = new HuffNode('a', 2, null, null, nNode);
+        HuffNode aNode = new HuffNode('a', 2, null, null);
         nNode.leftNode = aNode;
-        HuffNode twoNode = new HuffNode(0, 2, null, null, nNode);
+        HuffNode twoNode = new HuffNode(0, 2, null, null);
         nNode.rightNode = twoNode;
         //Third node
-        twoNode.rightNode = new HuffNode('e', 1, null, null, twoNode);
-        twoNode.leftNode = new HuffNode('b', 1, null, null, twoNode);
+        twoNode.rightNode = new HuffNode('e', 1, null, null);
+        twoNode.leftNode = new HuffNode('b', 1, null, null);
         //Assert
         assertEquals(expected, root);
     }
