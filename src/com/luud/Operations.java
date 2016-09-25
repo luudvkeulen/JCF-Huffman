@@ -24,10 +24,7 @@ class Operations {
 
     public PriorityQueue<HuffNode> sortCountedCharacters(ArrayList<HuffNode> nodes) {
         PriorityQueue<HuffNode> queue = new PriorityQueue<>();
-        for(HuffNode n : nodes) {
-            queue.offer(n);
-        }
-
+        nodes.forEach(queue::offer);
         return queue;
     }
 
