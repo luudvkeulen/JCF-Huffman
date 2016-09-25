@@ -6,7 +6,7 @@ import com.luud.models.HuffNode;
 import java.io.*;
 import java.util.*;
 
-public class Operations {
+class Operations {
 
     public ArrayList<HuffNode> countCharacters (ArrayList<Character> characters) {
         ArrayList<HuffNode> nodes = new ArrayList<>();
@@ -44,7 +44,7 @@ public class Operations {
         return nodes.peek();
     }
 
-    public HashMap<Character, String> charactersToBinary(ArrayList<HuffNode> uniqueCharacters, HuffNode root) {
+    private HashMap<Character, String> charactersToBinary(ArrayList<HuffNode> uniqueCharacters, HuffNode root) {
         HashMap<Character, String> result = new HashMap<>();
         for(HuffNode hn : uniqueCharacters) {
             result.put((char)hn.value, lookup(root, (char)hn.value));
@@ -56,11 +56,11 @@ public class Operations {
         return rootNode.lookup(c, "", new StringBuilder()).toString();
     }
 
+    //region encoding/decoding
     public String encode(ArrayList<Character> chars, ArrayList<HuffNode> uniquechars, HuffNode rootNode) {
         String returnString = "";
         HashMap<Character, String> binaryStrings = charactersToBinary(uniquechars, rootNode);
         for(Character c : chars) {
-            //returnString += lookup(rootNode, c);
             returnString += binaryStrings.get(c);
         }
         return returnString;
@@ -77,15 +77,15 @@ public class Operations {
         }
         return message;
     }
+    //endregion
 
+    //region File related methods
     public void exportToFile(HuffNode rootNode) {
         try {
             FileOutputStream fos = new FileOutputStream("boom.bin");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(rootNode);
             oos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -97,8 +97,6 @@ public class Operations {
             FileOutputStream fos = new FileOutputStream("encoded.bin");
             fos.write(bitSet.toByteArray());
             fos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -119,13 +117,8 @@ public class Operations {
         try {
             FileInputStream fis = new FileInputStream("boom.bin");
             ObjectInputStream oos = new ObjectInputStream(fis);
-            HuffNode result = (HuffNode)oos.readObject();
-            return result;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+            return (HuffNode)oos.readObject();
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return null;
@@ -148,8 +141,10 @@ public class Operations {
         }
         return "";
     }
+    //endregion
 
-    public BitSet createBitset(String s) {
+    //region Bit related methods
+    private BitSet createBitset(String s) {
         BitSet bitSet = new BitSet(s.length());
         int bitcounter = 0;
         for(Character c : s.toCharArray()) {
@@ -161,7 +156,7 @@ public class Operations {
         return bitSet;
     }
 
-    public String bitSetToString(BitSet set){
+    private String bitSetToString(BitSet set){
         String result = "";
         for(int i = 0; i < set.length(); i++) {
             if(set.get(i)) {
@@ -172,4 +167,5 @@ public class Operations {
         }
         return result;
     }
+    //endregion
 }

@@ -2,15 +2,13 @@ package com.luud;
 
 import com.luud.models.HuffNode;
 import org.junit.*;
-
-import java.lang.reflect.Array;
 import java.util.*;
 
 import static org.junit.Assert.*;
 
 public class OperationsTest {
-    Operations operations = new Operations();
-    ArrayList<Character> characters = new ArrayList<>();
+    private final Operations operations = new Operations();
+    private ArrayList<Character> characters = new ArrayList<>();
 
     @Before
     public void setUp() {
@@ -65,8 +63,7 @@ public class OperationsTest {
         HuffNode fourNode = new HuffNode(0, 4, null, null);
         HuffNode expected = new HuffNode(0, 7, nNode, fourNode);
         //Second node
-        HuffNode aNode = new HuffNode('a', 2, null, null);
-        nNode.leftNode = aNode;
+        nNode.leftNode = new HuffNode('a', 2, null, null);
         HuffNode twoNode = new HuffNode(0, 2, null, null);
         nNode.rightNode = twoNode;
         //Third node

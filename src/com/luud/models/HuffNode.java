@@ -1,10 +1,9 @@
 package com.luud.models;
 
 import java.io.Serializable;
-import java.util.Map;
 
-public class HuffNode implements Comparable<HuffNode>, Serializable{
-    public int value;
+public class HuffNode implements Comparable<HuffNode>, Serializable {
+    public final int value;
     public int weight;
     public HuffNode leftNode;
     public HuffNode rightNode;
@@ -25,6 +24,7 @@ public class HuffNode implements Comparable<HuffNode>, Serializable{
         weight += 1;
     }
 
+    //region Encoding and decoding
     public StringBuilder lookup(Character c, String current, StringBuilder result) {
         if(c == this.value) {
             result.append(current);
@@ -64,7 +64,9 @@ public class HuffNode implements Comparable<HuffNode>, Serializable{
         }
         return result;
     }
+    //endregion
 
+    //region overrides
     @Override
     public int compareTo(HuffNode node) {
         return weight - node.weight;
@@ -72,6 +74,7 @@ public class HuffNode implements Comparable<HuffNode>, Serializable{
 
     @Override
     public boolean equals(Object other){
+        if (!HuffNode.class.isAssignableFrom(other.getClass())) return false;
         HuffNode otherNode = (HuffNode)other;
         return otherNode.value == value;
     }
@@ -80,4 +83,5 @@ public class HuffNode implements Comparable<HuffNode>, Serializable{
     public String toString() {
         return String.format("%s: %s", (char)value, weight);
     }
+    //endregion
 }

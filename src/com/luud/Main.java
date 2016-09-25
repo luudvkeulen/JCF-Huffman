@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
-public class Main {
+class Main {
     private static final Operations operations = new Operations();
 
     public static void main(String[] args) throws IOException {
@@ -38,8 +38,6 @@ public class Main {
             while((character = br.read()) != -1) {
                 characters.add((char)character);
             }
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
