@@ -17,7 +17,7 @@ public class Main {
             PriorityQueue<HuffNode> sortedNodes = operations.sortCountedCharacters(countedNodes);
             HuffNode rootNode = operations.createTree(sortedNodes);
             operations.exportToFile(rootNode);
-            String encoded = operations.encode(characters, rootNode);
+            String encoded = operations.encode(characters, countedNodes, rootNode);
             operations.exportToFile(encoded);
             System.out.println(encoded);
         } else {

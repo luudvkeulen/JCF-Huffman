@@ -44,14 +44,24 @@ public class Operations {
         return nodes.peek();
     }
 
+    public HashMap<Character, String> charactersToBinary(ArrayList<HuffNode> uniqueCharacters, HuffNode root) {
+        HashMap<Character, String> result = new HashMap<>();
+        for(HuffNode hn : uniqueCharacters) {
+            result.put((char)hn.value, lookup(root, (char)hn.value));
+        }
+        return result;
+    }
+
     public String lookup(HuffNode rootNode, Character c) {
         return rootNode.lookup(c, "", new StringBuilder()).toString();
     }
 
-    public String encode(ArrayList<Character> chars, HuffNode rootNode) {
+    public String encode(ArrayList<Character> chars, ArrayList<HuffNode> uniquechars, HuffNode rootNode) {
         String returnString = "";
+        HashMap<Character, String> binaryStrings = charactersToBinary(uniquechars, rootNode);
         for(Character c : chars) {
-            returnString += lookup(rootNode, c);
+            //returnString += lookup(rootNode, c);
+            returnString += binaryStrings.get(c);
         }
         return returnString;
     }

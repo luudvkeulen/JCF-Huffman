@@ -97,8 +97,9 @@ public class OperationsTest {
     @Test
     public void encodeTest() {
         String expected = "1101001001110";
-        HuffNode root = operations.createTree(operations.sortCountedCharacters(operations.countCharacters(characters)));
-        String result = operations.encode(characters, root);
+        ArrayList<HuffNode> uniqueCharacters = operations.countCharacters(characters);
+        HuffNode root = operations.createTree(operations.sortCountedCharacters(uniqueCharacters));
+        String result = operations.encode(characters, uniqueCharacters, root);
         assertEquals(expected, result);
     }
 }
