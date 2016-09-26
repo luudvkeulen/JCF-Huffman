@@ -142,7 +142,7 @@ class Operations {
 
     //region Bit related methods
     private BitSet createBitset(String s) {
-        BitSet bitSet = new BitSet(s.length());
+        BitSet bitSet = new BitSet(s.length() + 1);
         int bitcounter = 0;
         for(Character c : s.toCharArray()) {
             if(c.equals('1')) {
@@ -150,12 +150,13 @@ class Operations {
             }
             bitcounter++;
         }
+        bitSet.set(bitcounter+1);
         return bitSet;
     }
 
     private String bitSetToString(BitSet set){
         String result = "";
-        for(int i = 0; i < set.length(); i++) {
+        for(int i = 0; i < (set.length() - 2); i++) {
             if(set.get(i)) {
                 result += "1";
             } else {
